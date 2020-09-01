@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/bin/Debug
+/MarsPhotosOfTheDay.API/bin/Debug/netcoreapp3.1
+/MarsPhotosOfTheDay.API/obj
+/MarsPhotosOfTheDay.Services/bin/Debug/netstandard2.0
+/MarsPhotosOfTheDay.Services/obj
+/MarsRoverPhotosOfTheDay.UnitTests/bin/Debug/netcoreapp3.1
+/MarsRoverPhotosOfTheDay.UnitTests/obj
+/obj
