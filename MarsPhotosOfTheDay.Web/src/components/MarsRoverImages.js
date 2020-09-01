@@ -12,9 +12,9 @@ export class MarsRoverImages extends Component {
     this.populateMarsRoverImagesData();
   }
 
-  handleClick = (fileName) => {
-    console.log("download " + fileName)
-		fetch('https://localhost:5001/MarsPhotosOfTheDay/download?file=' + fileName)
+  handleClick = (imageSrc) => {
+    console.log("download " + imageSrc)
+		fetch('https://localhost:5001/MarsPhotosOfTheDay/download?url=' + imageSrc)
 			.then(response => {
 				response.blob().then(blob => {
 					let url = window.URL.createObjectURL(blob);

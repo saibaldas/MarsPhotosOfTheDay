@@ -10,6 +10,9 @@ using MarsPhotosOfTheDay.Services.Interfaces;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
+using System.Net;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace MarsPhotosOfTheDay.Controllers
 {
@@ -94,12 +97,24 @@ namespace MarsPhotosOfTheDay.Controllers
 
         [HttpGet]
         [Route("download")]
-        public async Task<byte[]> DownloadOneImage(string url)
+        public FileContentResult DownloadOneImage(string url)
         {
-            var client = new HttpClient();
-            var responseImage = await client.GetAsync(url);
-            Byte[] byteArray = await responseImage.Content.ReadAsByteArrayAsync();
-            return byteArray.ToArray();
+            using (WebClient webClient = new WebClient())
+            {
+                byte[] data = webClient.DownloadData(url);
+                return new FileContentResult(data, "image/jpg");
+                /*
+                using (MemoryStream memoryStream = new MemoryStream(data))
+                {
+                    using (var imageStream = Image.FromStream(memoryStream))
+                    {
+                        imageStream.Save(memoryStream, ImageFormat.Jpeg);
+                    }
+                    var fileContents = memoryStream.ToArray();
+                    return new FileContentResult(fileContents, "image/jpg");
+                }
+                */
+            }           
         }
     }
 }
