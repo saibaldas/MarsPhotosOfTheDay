@@ -9,6 +9,6 @@ MarsPhotosOfTheDay
 6) Added Web Browser support to display images
    Start the WebApi project using docker compose
    Go to the Web Project
-     Open in Visual Studio Code and then npm start
+     Open in Visual Studio Code and then npm install & npm start
         Browser opens localhost:5000 with MarsRoverImages
   I am adding the Web Browser support to download the images locally
