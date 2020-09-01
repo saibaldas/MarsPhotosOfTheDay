@@ -36,12 +36,19 @@ namespace MarsPhotosOfTheDay.Controllers
             {
                 var response = await _marsRoverPhotosClient.FetchMarsRoverPhotosOfTheDayAsync(dateRequested);
 
-                return Ok(response.Photos.photos.Select(photo => new Photo
+                if (response.Photos != null)
                 {
-                    id = photo.id,
-                    img_src = photo.img_src
-                })
-                .ToArray());
+                    return Ok(response.Photos.photos.Select(photo => new Photo
+                    {
+                        id = photo.id,
+                        img_src = photo.img_src
+                    })
+                    .ToArray());
+                }
+                else
+                {
+                    return Ok("No Photo found");
+                }
             }
             else
             {
