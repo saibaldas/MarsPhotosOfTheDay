@@ -15,3 +15,5 @@
 /docker/obj
 /MarsPhotosOfTheDay.UnitTests/obj
 /MarsPhotosOfTheDay.UnitTests/bin/Debug/netcoreapp3.1
+/MarsPhotosOfTheDay.Services/bin/Release/netstandard2.0
+/MarsPhotosOfTheDay.API/bin/Release/netcoreapp3.1
