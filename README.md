@@ -5,11 +5,10 @@ MarsPhotosOfTheDay
 2) Select MarsPhotosOfTheDay.AIP as the Startup project
 3) Select IIS Express as the profile to debug and click the debugger button,
 4) Swagger will open. You can now execute the APIs
-    - I am still working on the DownloadAsZip and DownloadOneByOne
-    - I am still adding Unit Testing
-5) Added Web Browser support to display images
-   Start the WebApi project 
-   Go to the Web Project and then ClientApp
+5) Added Docker support to the WebAPI project. Run with Docker Compose
+6) Added Web Browser support to display images
+   Start the WebApi project using docker compose
+   Go to the Web Project
      Open in Visual Studio Code and then npm start
-        Browser opens localhost:5000 Click the MarsRoverImages tab
-6) Added Docker support to the WebAPI project. Run with Docker Compose
+        Browser opens localhost:5000 with MarsRoverImages
+  I am adding the Web Browser support to download the images locally
