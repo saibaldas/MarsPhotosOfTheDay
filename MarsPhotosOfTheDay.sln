@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarsPhotosOfTheDay.Services
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker\docker-compose.dcproj", "{183330C8-1AC3-4C58-B69F-1C967471EE50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarsPhotosOfTheDay.UnitTests", "..\MarsPhotosOfTheDay.UnitTests\MarsPhotosOfTheDay.UnitTests.csproj", "{A40CE952-0416-4168-B2E8-E44E9C6C9EF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarsPhotosOfTheDay.UnitTests", "MarsPhotosOfTheDay.UnitTests\MarsPhotosOfTheDay.UnitTests.csproj", "{A40CE952-0416-4168-B2E8-E44E9C6C9EF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
