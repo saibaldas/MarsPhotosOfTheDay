@@ -6,14 +6,13 @@ export class MarsRoverImages extends Component {
   constructor(props) {
     super(props);
     this.state = { photos: [], loading: true };
-    this.downloadImage = this.downloadImage.bind(this);
   }
 
   componentDidMount() {
     this.populateMarsRoverImagesData();
   }
 
-  downloadImage(fileName) {
+  handleClick = (fileName) => {
     console.log("download " + fileName)
 		fetch('https://localhost:5001/MarsPhotosOfTheDay/download?file=' + fileName)
 			.then(response => {
@@ -21,14 +20,14 @@ export class MarsRoverImages extends Component {
 					let url = window.URL.createObjectURL(blob);
 					let a = document.createElement('a');
 					a.href = url;
-					a.download = 'employees.json';
+					a.download = "Image1.jpg";
 					a.click();
 				});
 				//window.location.href = response.url;
 		});
   }
   
-  static renderMarsRoverImagesTable(photos) {
+  renderMarsRoverImagesTable() {
     return (
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
@@ -39,10 +38,10 @@ export class MarsRoverImages extends Component {
         <tbody>
           <div>
             <ul>
-              {photos.map(photo =>
+              {this.state.photos.map(photo =>
                 <li key={photo.img_src}>
                       <img src={photo.img_src} width="100" height="100"/>
-                      <button onClick={() => this.downloadImage(photo.img_src)}>Download</button>
+                      <button onClick={() => this.handleClick(photo.img_src)}>Download</button>
                 </li>
               )}
             </ul>
@@ -55,7 +54,7 @@ export class MarsRoverImages extends Component {
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-        : MarsRoverImages.renderMarsRoverImagesTable(this.state.photos);
+        : this.renderMarsRoverImagesTable();
 
     return (
       <div>

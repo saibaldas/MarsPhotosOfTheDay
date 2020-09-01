@@ -93,7 +93,7 @@ namespace MarsPhotosOfTheDay.Controllers
         }
 
         [HttpGet]
-        [Route("downloadonebyone")]
+        [Route("download")]
         public async Task<byte[]> DownloadOneImage(string url)
         {
             var client = new HttpClient();
