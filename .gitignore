@@ -13,4 +13,5 @@
 /obj
 /docker/bin/Debug
 /docker/obj
-/MarsPhotosOfTheDay.UnitTests
+/MarsPhotosOfTheDay.UnitTests/obj
+/MarsPhotosOfTheDay.UnitTests/bin/Debug/netcoreapp3.1
