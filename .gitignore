@@ -11,3 +11,5 @@
 /MarsRoverPhotosOfTheDay.UnitTests/bin/Debug/netcoreapp3.1
 /MarsRoverPhotosOfTheDay.UnitTests/obj
 /obj
+/docker/bin/Debug
+/docker/obj

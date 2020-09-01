@@ -94,30 +94,12 @@ namespace MarsPhotosOfTheDay.Controllers
 
         [HttpGet]
         [Route("downloadonebyone")]
-        public async Task<byte[]> DownloadOneByOne(string date)
+        public async Task<byte[]> DownloadOneImage(string url)
         {
-            DateTime dateRequested;
-            if (DateTime.TryParse(date, out dateRequested))
-            {
-                var response = await _marsRoverPhotosClient.FetchMarsRoverPhotosOfTheDayAsync(dateRequested);
-                var client = new HttpClient();
-                using (var memoryStream = new MemoryStream())
-                {
-                    response.Photos.photos.ForEach(async photo =>
-                    {
-                        var responseImage = await client.GetAsync(photo.img_src);
-                        using (var streamReader = await responseImage.Content.ReadAsStreamAsync())
-                        {
-                            await memoryStream.CopyToAsync(streamReader);
-                        }
-                    });
-                    return memoryStream.ToArray();
-                }
-            }
-            else
-            {
-                return new byte[1];
-            }
+            var client = new HttpClient();
+            var responseImage = await client.GetAsync(url);
+            Byte[] byteArray = await responseImage.Content.ReadAsByteArrayAsync();
+            return byteArray.ToArray();
         }
     }
 }

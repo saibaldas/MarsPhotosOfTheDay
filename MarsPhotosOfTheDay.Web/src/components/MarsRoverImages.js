@@ -46,7 +46,7 @@ export class MarsRoverImages extends Component {
   }
 
     async populateMarsRoverImagesData() {
-        const response = await fetch('https://localhost:5001/MarsPhotosOfTheDay/urls?date=02%2F27%2F17');
+        const response = await fetch('http://localhost:32788/MarsPhotosOfTheDay/urls?date=02%2F27%2F17');
     const data = await response.json();
     this.setState({ photos: data, loading: false });
   }
