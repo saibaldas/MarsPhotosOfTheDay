@@ -5,14 +5,14 @@ export class MarsRoverImages extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { photos: [], loading: true };
+    this.state = { photos: [], loading: true, dateToSearch: '' };
   }
 
   componentDidMount() {
-    this.populateMarsRoverImagesData();
+    //this.populateMarsRoverImagesData();
   }
 
-  handleClick = (imageSrc) => {
+  handleDownload = (imageSrc) => {
     console.log("download " + imageSrc)
 		fetch('https://localhost:5001/MarsPhotosOfTheDay/download?url=' + imageSrc)
 			.then(response => {
@@ -27,13 +27,22 @@ export class MarsRoverImages extends Component {
 				//window.location.href = response.url;
 		});
   }
+
+  handleChange = (e) => {
+    this.setState({ dateToSearch: e.target.value });
+  }
   
   renderMarsRoverImagesTable() {
     return (
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
           <tr>
-            <th>Images</th>
+            <input
+              id="dateToSearch"
+              onChange={this.handleChange}
+              value={this.state.dateToSearch}
+            />
+            <button onClick={() => this.populateMarsRoverImagesData()}>Show Images</button>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +51,7 @@ export class MarsRoverImages extends Component {
               {this.state.photos.map(photo =>
                 <li key={photo.img_src}>
                       <img src={photo.img_src} width="100" height="100"/>
-                      <button onClick={() => this.handleClick(photo.img_src)}>Download</button>
+                      <button onClick={() => this.handleDownload(photo.img_src)}>Download</button>
                 </li>
               )}
             </ul>
@@ -53,10 +62,10 @@ export class MarsRoverImages extends Component {
   }
 
   render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-        : this.renderMarsRoverImagesTable();
-
+    //let contents = this.state.loading
+    //  ? <p><em>Loading...</em></p>
+    //    : this.renderMarsRoverImagesTable();
+    let contents = this.renderMarsRoverImagesTable();
     return (
       <div>
         <h1 id="tabelLabel" >Images</h1>
@@ -67,7 +76,7 @@ export class MarsRoverImages extends Component {
   }
 
     async populateMarsRoverImagesData() {
-        const response = await fetch('https://localhost:5001/MarsPhotosOfTheDay/urls?date=02%2F27%2F17');
+        const response = await fetch('https://localhost:5001/MarsPhotosOfTheDay/urls?date=' + this.state.dateToSearch);
     const data = await response.json();
     this.setState({ photos: data, loading: false });
   }
