@@ -67,26 +67,25 @@ namespace MarsPhotosOfTheDay.Controllers
             if (DateTime.TryParse(date, out dateRequested))
             {
                 var response = await _marsRoverPhotosClient.FetchMarsRoverPhotosOfTheDayAsync(dateRequested);
-                var client = new HttpClient();
-                var zipName = $"archive-{DateTime.Now.ToString("yyyy_MM_dd-HH_mm_ss")}.zip";
-                using (var memoryStream = new MemoryStream())
+                using (WebClient webClient = new WebClient())
                 {
-                    using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                    var zipName = $"archive-{DateTime.Now.ToString("yyyy_MM_dd-HH_mm_ss")}.zip";
+                    using (var memoryStream = new MemoryStream())
                     {
-                        response.Photos.photos.ForEach(async photo =>
+                        using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                         {
-                            var responseImage = await client.GetAsync(photo.img_src);
-                            using (var streamReader = await responseImage.Content.ReadAsStreamAsync())
+                            response.Photos.photos.ForEach(async photo =>
                             {
+                                byte[] data = webClient.DownloadData(photo.img_src);
                                 var theFile = archive.CreateEntry(photo.img_src);
                                 using (var streamWriter = new StreamWriter(theFile.Open()))
                                 {
-                                    streamWriter.Write(streamReader);
+                                    streamWriter.BaseStream.Write(data, 0, data.Length);
                                 }
-                            }
-                        });
+                            });
+                        }
+                        return memoryStream.ToArray();
                     }
-                    return memoryStream.ToArray();
                 }
             }
             else
@@ -103,17 +102,6 @@ namespace MarsPhotosOfTheDay.Controllers
             {
                 byte[] data = webClient.DownloadData(url);
                 return new FileContentResult(data, "image/jpg");
-                /*
-                using (MemoryStream memoryStream = new MemoryStream(data))
-                {
-                    using (var imageStream = Image.FromStream(memoryStream))
-                    {
-                        imageStream.Save(memoryStream, ImageFormat.Jpeg);
-                    }
-                    var fileContents = memoryStream.ToArray();
-                    return new FileContentResult(fileContents, "image/jpg");
-                }
-                */
             }           
         }
     }

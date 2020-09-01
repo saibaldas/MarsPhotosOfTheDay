@@ -18,9 +18,10 @@ export class MarsRoverImages extends Component {
 			.then(response => {
 				response.blob().then(blob => {
 					let url = window.URL.createObjectURL(blob);
-					let a = document.createElement('a');
+          let a = document.createElement('a');
+          var fileName = imageSrc.substring(imageSrc.lastIndexOf('/')+1);
 					a.href = url;
-					a.download = "Image1.jpg";
+					a.download = fileName;
 					a.click();
 				});
 				//window.location.href = response.url;
