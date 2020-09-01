@@ -14,4 +14,4 @@ MarsPhotosOfTheDay
   I am adding the Web Browser support to download the images locally
 
 ![Screenshot](Swagger.PNG)
-![Screenshot](Web Browser.PNG)
+![Screenshot](WebBrowser.PNG)
