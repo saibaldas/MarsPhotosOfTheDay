@@ -74,7 +74,7 @@ namespace MarsPhotosOfTheDay.Controllers
                     {
                         using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                         {
-                            response.Photos.photos.ForEach(async photo =>
+                            response.Photos.photos.ForEach( photo =>
                             {
                                 byte[] data = webClient.DownloadData(photo.img_src);
                                 var theFile = archive.CreateEntry(photo.img_src);

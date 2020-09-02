@@ -16,7 +16,7 @@ namespace MarsPhotosOfTheDay.Services.Services.Implementation
         private readonly IHttpRequester _httpRequester;
         private readonly IHttpResponseParser _httpResponseParser;
         private readonly IErrorHandler _errorHandler;
-        private string apiKey = "DEMO_KEY";
+        //private string apiKey = "DEMO_KEY";
 
         public MarsRoverPhotosClient(IHttpRequester httpRequester, IHttpResponseParser httpResponseParser, IErrorHandler errorHandler)
         {
